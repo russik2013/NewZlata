@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
 Route::post('auth', 'HomeController@auth');
 
 
@@ -32,6 +34,17 @@ Route::group(['middleware' => 'father'], function () {
             Route::post('list', 'Admin\AdminController@index');
 
         });
+
+        Route::group(['prefix' => 'farm'], function () {
+
+            Route::post('create', 'FarmController@store');
+            Route::post('update', 'FarmController@update');
+            Route::post('list', 'FarmController@index');
+            Route::post('read/{id}', 'FarmController@show');
+            Route::post('delete', 'FarmController@delete');
+
+        });
+
 
 
 

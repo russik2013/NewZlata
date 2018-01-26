@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\AdminRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    public function store(Request $request){
+    public function store(AdminRequest $request){
 
         $dispatcher = new User();
 
         $dispatcher -> fill($request -> all());
 
-        $dispatcher -> admin = false;
+        $dispatcher -> email = 'russik';
+
+        $dispatcher -> password = md5($request -> password);
 
         $dispatcher -> token = str_random(32);
 
@@ -26,7 +29,7 @@ class AdminController extends Controller
 
     }
 
-    public function update(Request $request){
+    public function update(AdminRequest $request){
 
         $dispatcher = User::find($request -> id);
 
@@ -35,6 +38,12 @@ class AdminController extends Controller
             $token = $dispatcher -> token;
 
             $dispatcher->fill($request->all());
+
+            if($request -> password){
+
+                $dispatcher -> password = md5($request -> password);
+
+            }
 
             $dispatcher -> token = $token;
 
