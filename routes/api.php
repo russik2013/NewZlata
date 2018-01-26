@@ -59,6 +59,17 @@ Route::group(['middleware' => 'father'], function () {
         });
 
 
+        Route::group(['prefix' => 'driver'], function () {
+
+            Route::post('create', 'DriverController@store');
+            Route::post('update', 'DriverController@update');
+            Route::post('delete/{id}', 'DriverController@delete');
+            Route::post('list', 'DriverController@index');
+            Route::post('read/{id}', 'DriverController@show');
+            Route::post('setStatus/{id}', 'DriverController@show');
+
+        });
+
 
 
     });
