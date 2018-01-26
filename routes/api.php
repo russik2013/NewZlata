@@ -43,6 +43,19 @@ Route::group(['middleware' => 'father'], function () {
             Route::post('read/{id}', 'FarmController@show');
             Route::post('delete', 'FarmController@delete');
 
+
+            Route::group(['prefix' => 'point'], function () {
+
+                Route::post('create', 'FarmPointController@store');
+                Route::post('update', 'FarmPointController@update');
+                Route::post('delete/{id}', 'FarmPointController@delete');
+                Route::post('list', 'FarmPointController@index');
+                Route::post('sender', 'FarmPointController@sender');
+                Route::post('receiver', 'FarmPointController@receiver');
+                Route::post('read/{id}', 'FarmPointController@show');
+
+            });
+
         });
 
 
